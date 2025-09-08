@@ -1,0 +1,34 @@
+users
+
+{
+  "_id": ObjectId,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "created_at": ISODate()
+}
+
+cv
+
+{
+  "_id": ObjectId,
+  "user_id": ObjectId,          // reference to users._id
+  "cv_text": "raw CV text here",
+  "created_at": ISODate()
+}
+
+interview_session
+
+{
+  "_id": ObjectId,
+  "user_id": ObjectId,          // reference to users._id
+  "cv_id": ObjectId,            // reference to cv._id
+  "job_description : "backend developer",
+  "questions": 
+   [
+ 	 {"question": "What is Python?", "answer": ""},
+ 	 {"question": "Explain MongoDB replication.", "answer": ""}
+  ],
+  "report": "",
+  "created_at": ISODate()
+}
+
