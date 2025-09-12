@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,Blueprint
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson.objectid import ObjectId
@@ -7,15 +7,12 @@ import os
 from dotenv import load_dotenv
 import os
 import jwt
+from config.db_config import users_collection
+crud_bp = Blueprint("crud_bp", __name__)
 
 app = Flask(__name__)
 CORS(app)
 
-# ✅ MongoDB connection (same cluster URI as Express)
-app.config["MONGO_URI"] = "mongodb+srv://mohamedazizmehripro_db_user:270705@cluster0.rmnt2no.mongodb.net/Interview?retryWrites=true&w=majority"
-mongo = PyMongo(app)
-
-users_collection = mongo.db.users  # same as your Mongoose "User" model
 
 load_dotenv()
 JWT_SECRET = os.getenv("JWT_SECRET", "fallback_secret")
