@@ -7,4 +7,3 @@ load_dotenv()
 mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 db = client["Interview"]
-users_collection=db["users"]
