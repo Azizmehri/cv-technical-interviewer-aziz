@@ -13,18 +13,18 @@ user_bp = Blueprint("user_bp", __name__)
 load_dotenv()
 JWT_SECRET = os.getenv("JWT_SECRET", "fallback_secret")
 # ------------------- SIGNUP -------------------
-@user_bp.route("/api/signup", methods=["POST"])
+@user_bp.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
 
     if not email or not password:
-        return jsonify({"error": "Email and password required"}), 400
+        return jsonify({"error": "Email and password required"}), 200
 
     existing_user = db["users"].find_one({"email": email})
     if existing_user:
-        return jsonify({"redirect": "/login", "error": "User already exists"}), 400
+        return jsonify({"redirect": "/login", "error": "User already exists"}), 200
 
     hashed_password = generate_password_hash(password)
     new_user = {
@@ -39,7 +39,7 @@ def signup():
     return jsonify({"token": token}), 201
 
 # ------------------- LOGIN -------------------
-@user_bp.route("/api/login", methods=["POST"])
+@user_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     email = data.get("email")
@@ -47,10 +47,10 @@ def login():
 
     user = db["users"].find_one({"email": email})
     if not user:
-        return jsonify({"redirect": "/signup", "error": "Invalid email or password"}), 400
+        return jsonify({"redirect": "/signup", "error": "Invalid email or password"}), 200
 
     if not check_password_hash(user["password"], password):
-        return jsonify({"error": "Invalid email or password"}), 400
+        return jsonify({"error": "Invalid email or password"}), 200
     token = jwt.encode({"user_id": str(user["_id"])}, JWT_SECRET, algorithm="HS256")
     if isinstance(token, bytes):
         token = token.decode("utf-8")
