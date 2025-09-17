@@ -30,7 +30,7 @@ export const LogIn = () => {
         setMessage("⚠️ User not found, redirecting to signup...");
         setTimeout(() => (window.location.href = data.redirect), 1500);
       } else if (data.error) {
-        setMessage(`❌ ${data.error}`);
+        setMessage(`555555`);
       }
     } catch (error) {
       console.error("Login error:", error);
