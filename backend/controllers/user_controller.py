@@ -13,18 +13,22 @@ user_bp = Blueprint("user_bp", __name__)
 load_dotenv()
 JWT_SECRET = os.getenv("JWT_SECRET", "fallback_secret")
 # ------------------- SIGNUP -------------------
+<<<<<<< HEAD
 @user_bp.route("/api/signup", methods=["POST"])
+=======
+@user_bp.route("/signup", methods=["POST"])
+>>>>>>> 7827b490eac83222f7064a0009e8c44c84dcc695
 def signup():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
 
     if not email or not password:
-        return jsonify({"error": "Email and password required"}), 400
+        return jsonify({"error": "Email and password required"}), 200
 
     existing_user = db["users"].find_one({"email": email})
     if existing_user:
-        return jsonify({"redirect": "/login", "error": "User already exists"}), 400
+        return jsonify({"redirect": "/login", "error": "User already exists"}), 200
 
     hashed_password = generate_password_hash(password)
     new_user = {
@@ -39,7 +43,11 @@ def signup():
     return jsonify({"token": token}), 201
 
 # ------------------- LOGIN -------------------
+<<<<<<< HEAD
 @user_bp.route("/api/login", methods=["POST"])
+=======
+@user_bp.route("/login", methods=["POST"])
+>>>>>>> 7827b490eac83222f7064a0009e8c44c84dcc695
 def login():
     data = request.get_json()
     email = data.get("email")
@@ -47,13 +55,24 @@ def login():
 
     user = db["users"].find_one({"email": email})
     if not user:
+<<<<<<< HEAD
         return jsonify({"redirect": "/signup", "error": "Invalid email"}), 200
 
     if not check_password_hash(user["password"], password):
         return jsonify({"error": "Invalid password"}), 200
+=======
+        return jsonify({"redirect": "/signup", "error": "Invalid email or password"}), 200
+
+    if not check_password_hash(user["password"], password):
+        return jsonify({"error": "Invalid email or password"}), 200
+>>>>>>> 7827b490eac83222f7064a0009e8c44c84dcc695
     token = jwt.encode({"user_id": str(user["_id"])}, JWT_SECRET, algorithm="HS256")
     if isinstance(token, bytes):
         token = token.decode("utf-8")
     print("JWT Token:", token)
     return jsonify({"token": token}), 201
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7827b490eac83222f7064a0009e8c44c84dcc695

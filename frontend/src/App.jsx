@@ -15,6 +15,7 @@ export default function App() {
       </nav>
 
       <Routes>
+
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/uploadcv" element={<ResumeUpload />} />

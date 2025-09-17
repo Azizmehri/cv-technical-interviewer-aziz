@@ -6,8 +6,13 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app) 
 
+<<<<<<< HEAD
 app.register_blueprint(crud_bp, url_prefix="/")
 app.register_blueprint(user_bp, url_prefix="/")
+=======
+app.register_blueprint(crud_bp, url_prefix="/api")
+app.register_blueprint(user_bp, url_prefix="/api")
+>>>>>>> 7827b490eac83222f7064a0009e8c44c84dcc695
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)

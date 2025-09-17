@@ -19,6 +19,7 @@ export async function LoginUser(email, password) {
   });
   return res.data;
 }
+
 export async function SignUpUser(email, password) {
   try {
     const res = await api.post("/signup", { email, password }); 
