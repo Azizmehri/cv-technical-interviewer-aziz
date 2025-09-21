@@ -98,7 +98,7 @@ const handleSubmit = () => {
 
       {/* Timer */}
       <Timer
-        initialMinutes={0}
+        initialMinutes={10}
         initialSeconds={5}
         className="absolute top-[61px] left-[1300px]"
         onComplete={() => console.log("Timer finished")}
@@ -145,15 +145,13 @@ const handleSubmit = () => {
 
       {/* Progress bar */}
       <div className="flex flex-col w-[837px] h-[49px] items-start gap-2.5 px-4 py-2.5 absolute top-[660px] left-[268px] bg-white rounded-[29px] overflow-hidden">
-        <BaseLiner
-          className="!self-stretch !flex-1 !w-full"
-          property1={progress + "%"}
-        />
-        <LogicPercentage
-          className="!absolute !left-[405px] !top-[13px]"
-          divClassName="!text-[#3d6004]"
-          property1={progress + "%"}
-        />
+        
+      <BaseLiner className="!self-stretch !flex-1 !w-full" property1={progress} />
+      <LogicPercentage
+        className="!absolute !left-[405px] !top-[13px]"
+        divClassName="!text-[#3d6004]"
+        property1={progress}
+      />
       </div>
     </div>
   );
